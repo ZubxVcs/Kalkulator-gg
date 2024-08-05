@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator "Gaktau"</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('Bg.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+        }
+        .calculator {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+            font-size: 1.2em;
+            text-align: right;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .calculator button {
+            padding: 20px;
+            font-size: 1.2em;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: #5a6268;
+        }
+        .calculator .equal {
+            background-color: #28a745;
+        }
+        .calculator .equal:hover {
+            background-color: #218838;
+        }
+        .calculator .clear {
+            background-color: #dc3545;
+        }
+        .calculator .clear:hover {
+            background-color: #c82333;
+        }
+        .profile {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .popup-content img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="appendOperator('+')">+</button>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="appendOperator('-')">-</button>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="appendOperator('*')">*</button>
+        <button onclick="clearDisplay()" class="clear">C</button>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="calculate()" class="equal">=</button>
+        <button onclick="appendOperator('/')">/</button>
+    </div>
+
+    <div class="profile" onclick="showPopup()">
+        <img src="5.jpg" alt="Profile Picture">
+    </div>
+
+    <div class="popup" onclick="hidePopup()">
+        <div class="popup-content" onclick="event.stopPropagation()">
+            <img src="5.jpg" alt="Profile Picture">
+            <p>by: Karl X ChatGPT</p>
+        </div>
+    </div>
+
+    <script>
+        let resultDisplayed = false;
+
+        function appendNumber(number) {
+            if (resultDisplayed) {
+                clearDisplay();
+                resultDisplayed = false;
+            }
+            document.getElementById('display').value += number;
+        }
+
+        function appendOperator(operator) {
+            if (resultDisplayed) {
+                clearDisplay();
+                resultDisplayed = false;
+            }
+            document.getElementById('display').value += ' ' + operator + ' ';
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function calculate() {
+            document.getElementById('display').value = 'gaktau';
+            resultDisplayed = true;
+        }
+
+        function showPopup() {
+            document.querySelector('.popup').style.display = 'flex';
+        }
+
+        function hidePopup() {
+            document.querySelector('.popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
